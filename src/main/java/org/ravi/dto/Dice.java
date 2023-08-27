@@ -2,15 +2,23 @@ package org.ravi.dto;
 
 import java.util.Random;
 
+/**
+ * Dice which has number of faces and result
+ */
 public class Dice {
     private Integer numberOfFaces;
-    private Integer value;
-
-    public Dice() {
-    }
+    private Integer result;
 
     public Dice(Integer numberOfFaces) {
         this.numberOfFaces = numberOfFaces;
+    }
+
+    /**
+     * @return random integer in range 1 to numberOfFaces
+     */
+    public int roleDice() {
+        setResult((new Random()).nextInt(numberOfFaces) + 1);
+        return getResult();
     }
 
     public Integer getNumberOfFaces() {
@@ -21,16 +29,11 @@ public class Dice {
         this.numberOfFaces = numberOfFaces;
     }
 
-    public Integer getValue() {
-        return value;
+    public Integer getResult() {
+        return result;
     }
 
-    public void setValue(Integer value) {
-        this.value = value;
-    }
-
-    public int roleDice() {
-        setValue((new Random()).nextInt(numberOfFaces) + 1);
-        return getValue();
+    public void setResult(Integer result) {
+        this.result = result;
     }
 }

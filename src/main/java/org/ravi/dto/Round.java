@@ -3,13 +3,12 @@ package org.ravi.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Model that represent one round of game. Has number of dices
+ */
 public class Round {
     private List<Dice> dices = new ArrayList<>();
     private List<Integer> results;
-    private Integer total;
-
-    public Round() {
-    }
 
     public Round(int numberOfDice, int numberOfFacesPerDice) {
         for (int i = 1; i <= numberOfDice; i++) {
@@ -17,13 +16,14 @@ public class Round {
         }
     }
 
+    /**
+     * This will call role dice method of each dice in the round and save the results in results list
+     */
     public void playRound() {
         setResults(new ArrayList<>());
-        this.total = 0;
         dices.forEach(dice -> {
             int value = dice.roleDice();
             getResults().add(value);
-            total += value;
         });
     }
 
@@ -43,11 +43,4 @@ public class Round {
         this.results = results;
     }
 
-    public Integer getTotal() {
-        return total;
-    }
-
-    public void setTotal(Integer total) {
-        this.total = total;
-    }
 }
