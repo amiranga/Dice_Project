@@ -16,12 +16,16 @@ public class Game {
     }
 
     public void playGame() {
-        for (Round round : rounds) {
+        for (int r = 0; r < rounds.size(); r++) {
+            Round round = rounds.get(r);
             round.playRound();
             List<Integer> roundResult = round.getResults();
             Integer roundTotal = round.getTotal();
-            System.out.println(roundResult);
-            System.out.println(roundTotal);
+            System.out.println("Round " + (r + 1));
+            System.out.println("------------------");
+            System.out.println("Result -> " + roundResult);
+            System.out.println("Total -> " + roundTotal);
+            System.out.println("------------------\n");
         }
     }
 
