@@ -16,7 +16,7 @@ import static org.ravi.constants.GameConstants.*;
  */
 public class Game {
     private final List<List<Integer>> finalResult = new ArrayList<>();
-    private List<Round> rounds = new ArrayList<>();
+    private final List<Round> rounds = new ArrayList<>();
 
     private int numberOfDices = DEFAULT_NUMBER_OF_DICES;
 
@@ -42,6 +42,9 @@ public class Game {
         }
     }
 
+    /**
+     * Read numberOfDices, numberOfFaces & numberOfRounds parameters from system input
+     */
     public void readGameParameters() {
         String stdIn;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -86,6 +89,20 @@ public class Game {
         }
     }
 
+    /**
+     * Print the game output based on user input
+     */
+    public void printGameResult() {
+        if (userEnteredNumberOfRounds) {
+            printFrequencyMap();
+        } else if (userEnteredNumberOfDices) {
+            printEachRoundResult();
+            printEachRoundTotal();
+        } else {
+            printEachRoundResult();
+        }
+    }
+
     private void printEachRoundResult() {
         System.out.println("Dice Values:");
         finalResult.forEach(System.out::println);
@@ -109,25 +126,6 @@ public class Game {
         });
         System.out.println("Dice Values Frequency:");
         System.out.println(frequencyMap);
-    }
-
-    public void printGameResult() {
-        if (userEnteredNumberOfRounds) {
-            printFrequencyMap();
-        } else if (userEnteredNumberOfDices) {
-            printEachRoundResult();
-            printEachRoundTotal();
-        } else {
-            printEachRoundResult();
-        }
-    }
-
-    public List<Round> getRounds() {
-        return rounds;
-    }
-
-    public void setRounds(List<Round> rounds) {
-        this.rounds = rounds;
     }
 
     public List<List<Integer>> getFinalResult() {
