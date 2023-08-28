@@ -1,6 +1,7 @@
 package com.docs.roller.game.dto;
 
-import com.docs.roller.game.enums.DiceGameParameter;
+import com.docs.roller.game.constants.DiceGameDefaults;
+import com.docs.roller.game.enums.GameMode;
 import com.docs.roller.game.interfaces.Game;
 
 import java.util.ArrayList;
@@ -13,31 +14,19 @@ import java.util.List;
 public class DiceGame implements Game {
     private final List<List<Integer>> finalResult = new ArrayList<>();
     private final List<DiceGameRound> rounds = new ArrayList<>();
-    private UserResponse numberOfDices;
-    private UserResponse numberOfFaces;
-    private UserResponse numberOfRounds;
+
+    private int numberOfDices = DiceGameDefaults.NUMBER_OF_DICES;
+    private int numberOfFaces = DiceGameDefaults.NUMBER_OF_FACES;
+    private int numberOfRounds = DiceGameDefaults.NUMBER_OF_ROUNDS;
+    private GameMode gameMode;
 
     public DiceGame() {
     }
 
-    public DiceGame(int numberOfDices, int numberOfFaces, int numberOfRounds) {
+    @Override
+    public void buildGame() {
         for (int i = 1; i <= numberOfRounds; i++) {
             rounds.add(new DiceGameRound(numberOfDices, numberOfFaces));
-        }
-    }
-
-    /**
-     * Read numberOfDices, numberOfFaces & numberOfRounds parameters from system input
-     */
-    @Override
-    public void readGameParameters() {
-        numberOfDices = DiceGameParameter.NUMBER_OF_DICES.readFromUser();
-        numberOfFaces = DiceGameParameter.NUMBER_OF_FACES.readFromUser();
-        numberOfRounds = DiceGameParameter.NUMBER_OF_ROUNDS.readFromUser();
-        if (validateGameParameters()) {
-            for (int i = 1; i <= numberOfRounds.getValue(); i++) {
-                rounds.add(new DiceGameRound(numberOfDices.getValue(), numberOfFaces.getValue()));
-            }
         }
     }
 
@@ -58,16 +47,21 @@ public class DiceGame implements Game {
      */
     @Override
     public void printGameResult() {
-        if (numberOfRounds.isGiven()) {
-            // If user enters number of rounds, final result will be frequency of each face
-            printFrequencyMap();
-        } else if (numberOfDices.isGiven()) {
-            // If user enters number of dices, final result will be each round result and total
-            printEachRoundResult();
-            printEachRoundTotal();
-        } else {
-            // If user enters number of dices, final result will be total
-            printEachRoundResult();
+        switch (gameMode) {
+            case MULTI_ROUND:
+                printFrequencyMap();
+                break;
+            case MULTI_DICE:
+                printEachRoundResult();
+                printEachRoundTotal();
+                break;
+            case SINGLE_DICE:
+                printEachRoundTotal();
+                break;
+            default:
+                printFrequencyMap();
+                printEachRoundResult();
+                printEachRoundTotal();
         }
     }
 
@@ -75,16 +69,22 @@ public class DiceGame implements Game {
      * Print each round each dice value comma seperated
      */
     private void printEachRoundResult() {
-        System.out.println("Dice Values:");
-        finalResult.forEach(System.out::println);
+        for (int i = 0; i < finalResult.size(); i++) {
+            int roundNumber = i + 1;
+            List<Integer> roundResult = finalResult.get(i);
+            System.out.println("Round " + roundNumber + " result = " + roundResult);
+        }
     }
 
     /**
      * Print each round total
      */
     private void printEachRoundTotal() {
-        System.out.println("Total:");
-        finalResult.forEach(roundResult -> System.out.println(roundResult.stream().mapToInt(r -> r).sum()));
+        for (int i = 0; i < finalResult.size(); i++) {
+            int roundNumber = i + 1;
+            List<Integer> roundResult = finalResult.get(i);
+            System.out.println("Round " + roundNumber + " total = " + roundResult.stream().mapToInt(r -> r).sum());
+        }
     }
 
 
@@ -100,21 +100,42 @@ public class DiceGame implements Game {
             }
             frequencyMap.put(diceValue, currentFrequency + 1);
         }));
-        System.out.println("Dice Values Frequency:");
-        System.out.println(frequencyMap);
+        frequencyMap.forEach((key, value) -> System.out.println("Frequency of " + key + " = " + value));
     }
 
     public List<List<Integer>> getFinalResult() {
         return finalResult;
     }
 
-    private boolean validateGameParameters() {
-        boolean result = numberOfDices.getValue() > 0 && numberOfFaces.getValue() > 0 && numberOfRounds.getValue() > 0;
-        if (!result) {
-            //If validation failed, show error message and exit the programme
-            System.out.println("Number of faces, rounds, and dices should be greater than 0");
-            System.exit(0);
-        }
-        return result;
+    public int getNumberOfDices() {
+        return numberOfDices;
+    }
+
+    public void setNumberOfDices(int numberOfDices) {
+        this.numberOfDices = numberOfDices;
+    }
+
+    public int getNumberOfFaces() {
+        return numberOfFaces;
+    }
+
+    public void setNumberOfFaces(int numberOfFaces) {
+        this.numberOfFaces = numberOfFaces;
+    }
+
+    public int getNumberOfRounds() {
+        return numberOfRounds;
+    }
+
+    public void setNumberOfRounds(int numberOfRounds) {
+        this.numberOfRounds = numberOfRounds;
+    }
+
+    public GameMode getGameMode() {
+        return gameMode;
+    }
+
+    public void setGameMode(GameMode gameMode) {
+        this.gameMode = gameMode;
     }
 }
