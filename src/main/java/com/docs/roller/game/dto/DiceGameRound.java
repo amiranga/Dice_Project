@@ -1,4 +1,6 @@
-package org.ravi.dto;
+package com.docs.roller.game.dto;
+
+import com.docs.roller.game.interfaces.GameRound;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,11 +8,11 @@ import java.util.List;
 /**
  * Model that represent one round of game. Has number of dices
  */
-public class Round {
+public class DiceGameRound implements GameRound {
     private List<Dice> dices = new ArrayList<>();
     private List<Integer> results;
 
-    public Round(int numberOfDice, int numberOfFacesPerDice) {
+    public DiceGameRound(int numberOfDice, int numberOfFacesPerDice) {
         for (int i = 1; i <= numberOfDice; i++) {
             dices.add(new Dice(numberOfFacesPerDice));
         }
@@ -19,6 +21,7 @@ public class Round {
     /**
      * This will call role dice method of each dice in the round and save the results in results list
      */
+    @Override
     public void playRound() {
         setResults(new ArrayList<>());
         dices.forEach(dice -> {

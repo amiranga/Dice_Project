@@ -1,4 +1,4 @@
-package org.ravi.dto;
+package com.docs.roller.game.dto;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +12,7 @@ class RoundTest {
     void playRound() {
         int numberOfDice = 5;
         int numberOfFaces = 6;
-        Round round = new Round(numberOfDice, numberOfFaces);
+        DiceGameRound round = new DiceGameRound(numberOfDice, numberOfFaces);
         round.playRound();
         //Assert that number of results are equal to number of dices
         List<Integer> results = round.getResults();

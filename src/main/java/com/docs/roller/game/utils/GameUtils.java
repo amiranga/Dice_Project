@@ -1,4 +1,4 @@
-package org.ravi.utils;
+package com.docs.roller.game.utils;
 
 public class GameUtils {
     public static boolean isNumeric(String str) {

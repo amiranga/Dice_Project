@@ -1,4 +1,4 @@
-package org.ravi.dto;
+package com.docs.roller.game.dto;
 
 import java.util.Random;
 
