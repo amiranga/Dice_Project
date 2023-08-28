@@ -93,15 +93,13 @@ public class DiceGame implements Game {
      */
     private void printFrequencyMap() {
         HashMap<Integer, Integer> frequencyMap = new HashMap<>();
-        finalResult.forEach(roundResult -> {
-            roundResult.forEach(diceValue -> {
-                int currentFrequency = 0;
-                if (frequencyMap.containsKey(diceValue)) {
-                    currentFrequency = frequencyMap.get(diceValue);
-                }
-                frequencyMap.put(diceValue, currentFrequency + 1);
-            });
-        });
+        finalResult.forEach(roundResult -> roundResult.forEach(diceValue -> {
+            int currentFrequency = 0;
+            if (frequencyMap.containsKey(diceValue)) {
+                currentFrequency = frequencyMap.get(diceValue);
+            }
+            frequencyMap.put(diceValue, currentFrequency + 1);
+        }));
         System.out.println("Dice Values Frequency:");
         System.out.println(frequencyMap);
     }
@@ -113,7 +111,9 @@ public class DiceGame implements Game {
     private boolean validateGameParameters() {
         boolean result = numberOfDices.getValue() > 0 && numberOfFaces.getValue() > 0 && numberOfRounds.getValue() > 0;
         if (!result) {
+            //If validation failed, show error message and exit the programme
             System.out.println("Number of faces, rounds, and dices should be greater than 0");
+            System.exit(0);
         }
         return result;
     }
