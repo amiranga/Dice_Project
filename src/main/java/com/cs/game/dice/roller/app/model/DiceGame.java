@@ -93,6 +93,7 @@ public class DiceGame implements IGame {
     @Override
     public void play() {
         if (hasInvalidInputs) {
+            // Skip the game if inputs are invalid
             return;
         }
         for (Round round : rounds) {
@@ -104,6 +105,7 @@ public class DiceGame implements IGame {
     @Override
     public String GetGameResult() {
         if (hasInvalidInputs) {
+            // Return error message if inputs are invalid
             return "Invalid Input values\nTotal: 0";
         }
         GameWriter gameWriter = new GameWriter();

@@ -1,1 +1,1 @@
-# Dice_Project
+# Simple Dice Rolling Game

@@ -2,6 +2,9 @@ package com.cs.game.dice.roller.app.util;
 
 public class DiceUtil {
 
+    /**
+     * Validate if the string is numeric and positive
+     */
     public static boolean isPositiveNumber(String str) {
         try {
             int i = Integer.parseInt(str);
@@ -16,6 +19,9 @@ public class DiceUtil {
         }
     }
 
+    /**
+     * Validate if the string is not empty
+     */
     public static boolean isNotEmpty(String str) {
         return !(str == null || str.trim().length() == 0);
     }
