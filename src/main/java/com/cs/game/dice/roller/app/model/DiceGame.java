@@ -21,41 +21,40 @@ public class DiceGame implements IGame {
     private boolean hasInvalidInputs;
 
     /**
-     * Use this when game parameters were taken from stdin by calling readInputParameter method
-     */
-    public DiceGame() {
-    }
-
-    /**
      * Use this to initialize the game with parameters
      */
     public DiceGame(String numberOfDicesStr, String numberOfFacesStr, String numberOfRoundsStr) {
-        if (DiceUtil.isNotEmpty(numberOfRoundsStr)) {
-            if (DiceUtil.isPositiveNumber(numberOfRoundsStr)) {
-                numberOfRounds = Integer.parseInt(numberOfRoundsStr);
-                userEnteredNumberOfRounds = true;
-            } else {
-                hasInvalidInputs = true;
+        try {
+            if (DiceUtil.isNotEmpty(numberOfRoundsStr)) {
+                if (DiceUtil.isPositiveNumber(numberOfRoundsStr)) {
+                    numberOfRounds = Integer.parseInt(numberOfRoundsStr);
+                    userEnteredNumberOfRounds = true;
+                } else {
+                    hasInvalidInputs = true;
+                }
             }
-        }
 
-        if (DiceUtil.isNotEmpty(numberOfDicesStr)) {
-            if (DiceUtil.isPositiveNumber(numberOfDicesStr)) {
-                numberOfDices = Integer.parseInt(numberOfDicesStr);
-                userEnteredNumberOfDices = true;
-            } else {
-                hasInvalidInputs = true;
+            if (DiceUtil.isNotEmpty(numberOfDicesStr)) {
+                if (DiceUtil.isPositiveNumber(numberOfDicesStr)) {
+                    numberOfDices = Integer.parseInt(numberOfDicesStr);
+                    userEnteredNumberOfDices = true;
+                } else {
+                    hasInvalidInputs = true;
+                }
             }
-        }
-        if (DiceUtil.isNotEmpty(numberOfFacesStr)) {
-            if (DiceUtil.isPositiveNumber(numberOfFacesStr)) {
-                numberOfFaces = Integer.parseInt(numberOfFacesStr);
-            } else {
-                hasInvalidInputs = true;
+            if (DiceUtil.isNotEmpty(numberOfFacesStr)) {
+                if (DiceUtil.isPositiveNumber(numberOfFacesStr)) {
+                    numberOfFaces = Integer.parseInt(numberOfFacesStr);
+                } else {
+                    hasInvalidInputs = true;
+                }
             }
-        }
-        if (!hasInvalidInputs) {
-            registerRounds();
+            if (!hasInvalidInputs) {
+                registerRounds();
+            }
+        } catch (Exception e) {
+            System.out.println("Unexpected error");
+            hasInvalidInputs = true;
         }
     }
 
@@ -86,7 +85,8 @@ public class DiceGame implements IGame {
 
             registerRounds();
         } catch (IOException ioe) {
-            System.out.println(ioe);
+            System.out.println("Unexpected error");
+            hasInvalidInputs = true;
         }
     }
 
