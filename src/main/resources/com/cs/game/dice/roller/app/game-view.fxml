@@ -13,7 +13,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
-<TitledPane animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+<TitledPane collapsible="false" text="Click Roll To Start the Game" animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
 			prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.1"
 			xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cs.game.dice.roller.app.HomePageController">
 	<content>
