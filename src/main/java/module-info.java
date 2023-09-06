@@ -3,6 +3,10 @@ module com.example.demo {
     requires javafx.fxml;
 
 
-    opens com.cs.game.dice.roller.app to javafx.fxml;
-    exports com.cs.game.dice.roller.app;
+    opens PD to javafx.fxml;
+    exports PD;
+    exports UI;
+    opens UI to javafx.fxml;
+    exports Test;
+    opens Test to javafx.fxml;
 }

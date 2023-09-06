@@ -1,4 +1,4 @@
-package com.cs.game.dice.roller.app;
+package Test;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

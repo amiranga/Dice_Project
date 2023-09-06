@@ -15,7 +15,7 @@
 <?import javafx.geometry.Insets?>
 <TitledPane collapsible="false" text="Click Roll To Start the Game" animated="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
 			prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.1"
-			xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cs.game.dice.roller.app.HomePageController">
+			xmlns:fx="http://javafx.com/fxml/1" fx:controller="UI.HomePageController">
 	<content>
 		<SplitPane dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0">
 			<items>
@@ -37,10 +37,8 @@
 					<children>
 						<Label text="Number of Dices" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 						<Label text="Number Of Faces" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-						<Label text="Number Of Rounds" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 						<TextField GridPane.columnIndex="2" GridPane.rowIndex="1" fx:id="nDices"/>
 						<TextField GridPane.columnIndex="2" GridPane.rowIndex="2" fx:id="nFaces"/>
-						<TextField GridPane.columnIndex="2" GridPane.rowIndex="3" fx:id="nRounds"/>
 						<GridPane GridPane.columnIndex="2" GridPane.rowIndex="4">
 							<columnConstraints>
 								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
